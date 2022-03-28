@@ -11,6 +11,7 @@ using NUnit.Framework;
 
 namespace Lingo.Domain.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "StandardWordPuzzle", @"Lingo.Domain\Puzzle\StandardWordPuzzle.cs")]
     public class StandardWordPuzzleTests : TestBase
     {
         private string _solution;
@@ -272,14 +273,37 @@ namespace Lingo.Domain.Tests
             Assert.That(_puzzle.Guesses.Count, Is.EqualTo(5), "There should be exactly 5 guesses in the 'Guesses' property of the puzzle.");
         }
 
+        [MonitoredTest("SubmitAnswer - Already 5 guesses made by opponent - Answer is an incorrect existing word - should register a sixth guess and keep the turn")]
+        public void _14_SubmitAnswer_Already5GuessesMadeByOpponent_AnswerIsAnIncorrectExistingWord_ShouldRegisterASixthGuessAndKeepTheTurn()
+        {
+            AssertThatInterfacesHaveNotChanged();
+
+            //Arrange
+            for (int i = 0; i < 5; i++)
+            {
+                _puzzle.SubmitAnswer(_otherWords[i]);
+            }
+
+            string answer = _otherWords[5];
+
+            //Act
+            SubmissionResult result = _puzzle.SubmitAnswer(answer);
+
+            //Assert
+            Assert.That(result, Is.Not.Null, "The returned result cannot be NULL.");
+            Assert.That(result.LostTurn, Is.False, "The returned result does not indicate that the turn is kept. " +
+                                                  "Why is the turn not lost? -> Because a sixth guess is made, the puzzle finishes, but the player can keep its turn.");
+            Assert.That(_puzzle.Guesses.Count, Is.EqualTo(6), "There should be exactly 6 guesses in the 'Guesses' property of the puzzle.");
+        }
+
         [MonitoredTest("SubmitAnswer - Should reveal the correctly positioned letters")]
-        [TestCase("KOPJES", new string[]{}, "K.....")]
+        [TestCase("KOPJES", new string[] { }, "K.....")]
         [TestCase("KOPJES", new[] { "KALIUM" }, "K.....")]
         [TestCase("KOPJES", new[] { "KOEIEN" }, "KO..E.")]
         [TestCase("KOPJES", new[] { "KAMERS", "KOEIEN" }, "KO..ES")]
         [TestCase("KOPJES", new[] { "KALIUM", "KOPJES" }, "KOPJES")]
         [TestCase("MUGGEN", new[] { "MOEDIG", "MAGERE", "MIDDAG" }, "M.G...")]
-        public void _14_SubmitAnswer_ShouldRevealTheCorrectlyPositionedLetters(string solution, string[] answers, string expectedRevealedLetters)
+        public void _15_SubmitAnswer_ShouldRevealTheCorrectlyPositionedLetters(string solution, string[] answers, string expectedRevealedLetters)
         {
             AssertThatInterfacesHaveNotChanged();
 
@@ -320,7 +344,7 @@ namespace Lingo.Domain.Tests
         }
 
         [MonitoredTest("IsFinished - Word not guessed yet and less than 6 guesses made - Should return false")]
-        public void _15_IsFinished_WordNotGuessedYetAndLessThan6GuessesMade_ShouldReturnFalse()
+        public void _16_IsFinished_WordNotGuessedYetAndLessThan6GuessesMade_ShouldReturnFalse()
         {
             AssertThatInterfacesHaveNotChanged();
 
@@ -336,7 +360,7 @@ namespace Lingo.Domain.Tests
         }
 
         [MonitoredTest("IsFinished - Word was guessed - Should return true")]
-        public void _16_IsFinished_WordWasGuessed_ShouldReturnTrue()
+        public void _17_IsFinished_WordWasGuessed_ShouldReturnTrue()
         {
             AssertThatInterfacesHaveNotChanged();
 
@@ -348,7 +372,7 @@ namespace Lingo.Domain.Tests
         }
 
         [MonitoredTest("IsFinished - Word not guessed yet but 6 guesses made - Should return true")]
-        public void _17_IsFinished_WordNotGuessedYetBut6GuessesMade_ShouldReturnTrue()
+        public void _18_IsFinished_WordNotGuessedYetBut6GuessesMade_ShouldReturnTrue()
         {
             AssertThatInterfacesHaveNotChanged();
 
@@ -366,7 +390,7 @@ namespace Lingo.Domain.Tests
         [TestCase("MUGGEN", "M.....", "MU....")]
         [TestCase("MUGGEN", "M..G..", "MU.G..")]
         [TestCase("MUGGEN", "MUGGEN", "MUGGEN")]
-        public void _18_RevealPart_ShouldRevealTheFirstLetterThatIsNotRevealedYet(string solution, string currentRevealedLetters, string expectedRevealedLetters)
+        public void _19_RevealPart_ShouldRevealTheFirstLetterThatIsNotRevealedYet(string solution, string currentRevealedLetters, string expectedRevealedLetters)
         {
             AssertThatInterfacesHaveNotChanged();
 
@@ -391,7 +415,7 @@ namespace Lingo.Domain.Tests
         [MonitoredTest("RevealPart - Only one letter not revealed - Should do nothing")]
         [TestCase("MUGGEN", "MUGGE.")]
         [TestCase("MUGGEN", "MU.GEN")]
-        public void _19_RevealPart_OnlyOneLetterNotRevealed_ShouldDoNothing(string solution, string currentRevealedLetters)
+        public void _20_RevealPart_OnlyOneLetterNotRevealed_ShouldDoNothing(string solution, string currentRevealedLetters)
         {
             AssertThatInterfacesHaveNotChanged();
 

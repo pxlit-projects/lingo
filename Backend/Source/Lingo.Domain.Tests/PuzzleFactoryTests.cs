@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 namespace Lingo.Domain.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "PuzzleFactory", @"Lingo.Domain\Puzzle\PuzzleFactory.cs")]
     public class PuzzleFactoryTests : TestBase
     {
 

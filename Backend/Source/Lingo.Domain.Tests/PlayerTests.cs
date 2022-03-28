@@ -12,6 +12,7 @@ using NUnit.Framework;
 
 namespace Lingo.Domain.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "Player", @"Lingo.Domain\Player.cs")]
     public class PlayerTests : TestBase
     {
         private IPlayer _player;

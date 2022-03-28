@@ -10,6 +10,7 @@ using NUnit.Framework;
 
 namespace Lingo.Domain.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "GameFactory", @"Lingo.Domain\GameFactory.cs")]
     public class GameFactoryTests : TestBase
     {
         private IGameFactory _factory;

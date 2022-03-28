@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 namespace Lingo.AppLogic.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "PuzzleService", @"Lingo.AppLogic\PuzzleService.cs")]
     public class PuzzleServiceTests : TestBase
     {
         private Mock<IPuzzleFactory> _puzzleFactoryMock;

@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace Lingo.Domain.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "LingoCardFactory", @"Lingo.Domain\Card\LingoCardFactory.cs")]
     public class LingoCardFactoryTests : TestBase
     {
         private ILingoCardFactory _factory;

@@ -18,6 +18,7 @@ using NUnit.Framework;
 
 namespace Lingo.Api.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "GameCtlr", @"Lingo.Api\Controllers\GameController.cs")]
     public class GameControllerTests : TestBase
     {
         private GameController _controller;

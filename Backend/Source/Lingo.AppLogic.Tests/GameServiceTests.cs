@@ -14,6 +14,7 @@ using NUnit.Framework;
 
 namespace Lingo.AppLogic.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "GameService", @"Lingo.AppLogic\GameService.cs")]
     public class GameServiceTests : TestBase
     {
         private Mock<IGameFactory> _gameFactoryMock;

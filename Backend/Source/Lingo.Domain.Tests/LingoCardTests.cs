@@ -10,6 +10,7 @@ using NUnit.Framework;
 
 namespace Lingo.Domain.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "LingoCard", @"Lingo.Domain\Card\LingoCard.cs")]
     public class LingoCardTests : TestBase
     {
         private string _iLingoCardHash;

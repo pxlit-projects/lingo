@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using Guts.Client.Core;
 using Lingo.Domain.Puzzle;
@@ -9,6 +7,7 @@ using NUnit.Framework;
 
 namespace Lingo.Domain.Tests;
 
+[ProjectComponentTestFixture("1TINProject", "Lingo", "WordGuess", @"Lingo.Domain\Puzzle\WordGuess.cs;Lingo.Domain\Puzzle\LetterMatch.cs")]
 public class WordGuessTests : TestBase
 {
     [MonitoredTest("Constructor - Word and solution have different lengths - Should throw argument exception")]

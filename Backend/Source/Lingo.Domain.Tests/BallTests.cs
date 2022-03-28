@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 namespace Lingo.Domain.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "Ball", @"Lingo.Domain\Pit\Ball.cs;Lingo.Domain\Pit\BallType.cs")]
     public class BallTests : TestBase
     {
         private string _iBallHash;

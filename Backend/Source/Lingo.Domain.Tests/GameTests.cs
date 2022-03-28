@@ -12,6 +12,7 @@ using NUnit.Framework;
 
 namespace Lingo.Domain.Tests
 {
+    [ProjectComponentTestFixture("1TINProject", "Lingo", "Game", @"Lingo.Domain\Game.cs;Lingo.Domain\GameSettings.cs")]
     public class GameTests : TestBase
     {
         private PlayerMockBuilder _player1MockBuilder;
