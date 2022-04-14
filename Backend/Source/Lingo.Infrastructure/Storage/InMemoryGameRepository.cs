@@ -35,7 +35,9 @@ namespace Lingo.Infrastructure.Storage
 
         public IList<IGame> GetGamesOfUser(Guid userId)
         {
-            IList<IGame> matchingGames = _gameDictionary.Values.Where(game => game.Player1.Id == userId || game.Player2.Id == userId).ToList();
+            IList<IGame> matchingGames = _gameDictionary.Values
+                .Where(game => (game.Player1.Id == userId || game.Player2.Id == userId) && !game.Finished)
+                .ToList();
             return matchingGames;
         }
     }

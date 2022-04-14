@@ -27,6 +27,7 @@ namespace Lingo.AppLogic.Contracts
 
         /// <summary>
         /// Retrieves the games that were created by the quiz master with the user as one of the players.
+        /// Only games that are not finished yet, are returned.
         /// </summary>
         /// <param name="userId">The unique identifier of the user that must be one of the players of the game.</param>
         IList<IGame> GetGamesOfUser(Guid userId);
