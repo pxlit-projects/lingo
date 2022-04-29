@@ -18,6 +18,15 @@ namespace Lingo.TestTools.Builders
             };
         }
 
+        public UserBuilder AsCloneOf(User user)
+        {
+            _user.Id = user.Id;
+            _user.Email = user.Email;
+            _user.NickName = user.NickName;
+            _user.UserName = user.UserName;
+            _user.PasswordHash = user.PasswordHash;
+            return this;
+        }
         public User Build()
         {
             return _user;

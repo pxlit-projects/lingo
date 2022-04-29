@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Guts.Client.Core;
 using Lingo.Domain.Card.Contracts;
 using Lingo.Domain.Contracts;
@@ -68,6 +69,18 @@ namespace Lingo.Domain.Tests
                 "One of the players must use odd numbers. " +
                 "When the player was created, " +
                 $"the '{nameof(Player)}' constructor should have called the '{nameof(ILingoCardFactory.CreateNew)}' method of the card factory with 'useEvenNumbers' false.");
+        }
+
+        [MonitoredTest("CreateStandardGameForUsers - Player 1 and 2 are the same - Should throw ApplicationException")]
+        public void _03_CreateStandardGameForUsers_Player1And2AreTheSame_ShouldThrowApplicationException()
+        {
+            //Arrange
+            User user = new UserBuilder().Build();
+            User sameUser = new UserBuilder().AsCloneOf(user).Build();
+
+            //Act
+            Assert.That(() => _factory.CreateStandardGameForUsers(user, sameUser, _puzzles),
+                Throws.TypeOf<ApplicationException>());
         }
     }
 }
