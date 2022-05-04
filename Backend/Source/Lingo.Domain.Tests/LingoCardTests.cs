@@ -95,8 +95,8 @@ namespace Lingo.Domain.Tests
             Assert.That(hasLingo, Is.True, $"LINGO is not detected. {LingoCardToString(card)}");
         }
 
-        [MonitoredTest("HasLingo - Diagonal Lingo - Should return true")]
-        public void _06_HasLingo_DiagonalLingo_ShouldReturnTrue()
+        [MonitoredTest("HasLingo - Horizontal Lingo - Should return true")]
+        public void _05_HasLingo_HorizontalLingo_ShouldReturnTrue()
         {
             AssertThatInterfaceIsNotChanged();
 
@@ -105,7 +105,31 @@ namespace Lingo.Domain.Tests
 
             UncrossWholeCard(card);
 
-            //cross out diagonal
+            //cross out random row
+            int lingoRowIndex = RandomGenerator.Next(0, 5);
+            for (int j = 0; j < 5; j++)
+            {
+                card.CardNumbers[lingoRowIndex, j].CrossedOut = true;
+            }
+
+            //Act
+            bool hasLingo = card.HasLingo;
+
+            //Assert
+            Assert.That(hasLingo, Is.True, $"LINGO is not detected. {LingoCardToString(card)}");
+        }
+
+        [MonitoredTest("HasLingo - LeftToRight Diagonal Lingo - Should return true")]
+        public void _06_HasLingo_LeftToRightDiagonalLingo_ShouldReturnTrue()
+        {
+            AssertThatInterfaceIsNotChanged();
+
+            //Arrange
+            ILingoCard card = new LingoCard(RandomGenerator.NextBool()) as ILingoCard;
+
+            UncrossWholeCard(card);
+
+            //cross out diagonal (left top to right bottom)
             for (int i = 0; i < 5; i++)
             {
                 card.CardNumbers[i, i].CrossedOut = true;
@@ -117,6 +141,7 @@ namespace Lingo.Domain.Tests
             //Assert
             Assert.That(hasLingo, Is.True, $"LINGO is not detected. {LingoCardToString(card)}");
         }
+
 
         [MonitoredTest("HasLingo - No Lingo Present - Should return false")]
         public void _07_HasLingo_NoLingoPresent_ShouldReturnFalse()
