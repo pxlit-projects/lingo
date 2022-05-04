@@ -95,30 +95,7 @@ namespace Lingo.Domain.Tests
             Assert.That(hasLingo, Is.True, $"LINGO is not detected. {LingoCardToString(card)}");
         }
 
-        [MonitoredTest("HasLingo - Horizontal Lingo - Should return true")]
-        public void _05_HasLingo_HorizontalLingo_ShouldReturnTrue()
-        {
-            AssertThatInterfaceIsNotChanged();
-
-            //Arrange
-            ILingoCard card = new LingoCard(RandomGenerator.NextBool()) as ILingoCard;
-
-            UncrossWholeCard(card);
-
-            //cross out random row
-            int lingoRowIndex = RandomGenerator.Next(0, 5);
-            for (int j = 0; j < 5; j++)
-            {
-                card.CardNumbers[lingoRowIndex, j].CrossedOut = true;
-            }
-
-            //Act
-            bool hasLingo = card.HasLingo;
-
-            //Assert
-            Assert.That(hasLingo, Is.True, $"LINGO is not detected. {LingoCardToString(card)}");
-        }
-
+       
         [MonitoredTest("HasLingo - LeftToRight Diagonal Lingo - Should return true")]
         public void _06_HasLingo_LeftToRightDiagonalLingo_ShouldReturnTrue()
         {
@@ -142,6 +119,28 @@ namespace Lingo.Domain.Tests
             Assert.That(hasLingo, Is.True, $"LINGO is not detected. {LingoCardToString(card)}");
         }
 
+        [MonitoredTest("HasLingo - LeftToRight Diagonal Lingo - Should return true")]
+        public void _06_HasLingo_RightToLeftDiagonalLingo_ShouldReturnTrue()
+        {
+            AssertThatInterfaceIsNotChanged();
+
+            //Arrange
+            ILingoCard card = new LingoCard(RandomGenerator.NextBool()) as ILingoCard;
+
+            UncrossWholeCard(card);
+
+            //cross out diagonal (left top to right bottom)
+            for (int i = 4; i >=0 ; i--)
+            {
+                card.CardNumbers[i, 4-i].CrossedOut = true;
+            }
+
+            //Act
+            bool hasLingo = card.HasLingo;
+
+            //Assert
+            Assert.That(hasLingo, Is.True, $"LINGO is not detected. {LingoCardToString(card)}");
+        }
 
         [MonitoredTest("HasLingo - No Lingo Present - Should return false")]
         public void _07_HasLingo_NoLingoPresent_ShouldReturnFalse()
