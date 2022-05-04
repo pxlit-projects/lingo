@@ -119,7 +119,7 @@ namespace Lingo.Domain.Tests
             Assert.That(hasLingo, Is.True, $"LINGO is not detected. {LingoCardToString(card)}");
         }
 
-        [MonitoredTest("HasLingo - LeftToRight Diagonal Lingo - Should return true")]
+        [MonitoredTest("HasLingo - RightToLeft Diagonal Lingo - Should return true")]
         public void _06_HasLingo_RightToLeftDiagonalLingo_ShouldReturnTrue()
         {
             AssertThatInterfaceIsNotChanged();
