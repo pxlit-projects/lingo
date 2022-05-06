@@ -392,6 +392,19 @@ namespace Lingo.Domain.Tests
             Assert.That(isFinished, Is.False);
         }
 
+        [MonitoredTest("Id - Should not change after construction")]
+        public void _16_Id_ShouldNotChangeAfterConstruction()
+        {
+            AssertThatInterfaceHasNotChanged();
+
+            //Assert
+            Guid firstId = _game.Id;
+            Guid secondId = _game.Id;
+            Assert.That(_game.Id, Is.Not.EqualTo(Guid.Empty), "The 'Id' property is not set correctly. It should be a non-empty Guid.");
+            Assert.That(firstId, Is.EqualTo(secondId), "When the 'Id' property is read twice it returns a different Guid the second time. " +
+                                                       "The same Guid should always be returned.");
+        }
+
         private void AssertThatInterfaceHasNotChanged()
         {
             Assert.That(_iGameHash, Is.EqualTo("69-23-68-F5-E7-F8-AB-AE-1F-2B-3F-53-F7-44-76-BE"),
