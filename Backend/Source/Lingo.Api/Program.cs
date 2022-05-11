@@ -39,6 +39,7 @@ builder.Services.AddControllers(options =>
     var jsonOutputFormatter = options.OutputFormatters.OfType<SystemTextJsonOutputFormatter>().First();
     jsonOutputFormatter.SerializerOptions.Converters.Add(new TwoDimensionalArrayJsonConverter());
     jsonOutputFormatter.SerializerOptions.Converters.Add(new PuzzleJsonConverter());
+    jsonOutputFormatter.SerializerOptions.Converters.Add(new BallPitJsonConverter());
 });
 
 builder.Services.AddCors();
