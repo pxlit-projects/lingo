@@ -59,6 +59,7 @@ public class WordGuessTests : TestBase
 
     [MonitoredTest("Constructor - Exact match on second duplicate letter - Should set letter matches correctly")]
     [TestCase("STAR", "RAAM", new[] { LetterMatch.CorrectButInWrongPosition, LetterMatch.DoesNotOccur, LetterMatch.Correct, LetterMatch.DoesNotOccur })]
+    [TestCase("KOPJES", "KOEIEN", new[] { LetterMatch.Correct, LetterMatch.Correct, LetterMatch.DoesNotOccur, LetterMatch.DoesNotOccur, LetterMatch.Correct, LetterMatch.DoesNotOccur })]
     public void _05_Constructor_ExactMatchOnSecondDuplicateLetter_ShouldSetLetterMatchesCorrectly(string solution, string word, LetterMatch[] expectedLetterMatches)
     {
         TestLetterMatches(solution, word, expectedLetterMatches);
