@@ -343,6 +343,50 @@ namespace Lingo.Domain.Tests
             });
         }
 
+
+        [MonitoredTest("SubmitAnswer - Answer is lowercase - Should reveal the correctly positioned letters")]
+        [TestCase("LATER", new[] { "laten" }, "LATE.")]
+        public void _15_b_SubmitAnswer_AnswerLowerCase_ShouldRevealTheCorrectlyPositionedLetters(string solution, string[] answers, string expectedRevealedLetters)
+        {
+            AssertThatInterfacesHaveNotChanged();
+
+            //Arrange
+            _wordDictionary = new HashSet<string> { solution };
+            _puzzle = new StandardWordPuzzle(solution, _wordDictionary) as IWordPuzzle;
+
+            //Act
+            foreach (string answer in answers)
+            {
+                _wordDictionary.Add(answer.ToUpper());
+                _puzzle.SubmitAnswer(answer);
+            }
+
+            //Assert
+            string revealedLetters = new string(_puzzle.RevealedLetters);
+            Assert.That(revealedLetters, Is.EqualTo(expectedRevealedLetters), () =>
+            {
+                var builder = new StringBuilder();
+                builder.AppendLine($"When the solution is '{solution}'");
+                switch (answers.Length)
+                {
+                    case 0:
+                        builder.AppendLine("and no answers are submitted yet, ");
+                        break;
+                    case 1:
+                        builder.AppendLine($"and one answer '{answers[0]}' was submitted, ");
+                        break;
+                    default:
+                        builder.AppendLine($"and the submitted answers are '{string.Join(',', answers)}', ");
+                        break;
+                }
+                builder.AppendLine($"the revealed letters should be '{expectedRevealedLetters}', but were '{revealedLetters}'.");
+                builder.AppendLine();
+                builder.AppendLine($"Tip: make sure the tests on the '{nameof(WordGuess)}' class are green first!!");
+                return builder.ToString();
+            });
+        }
+
+
         [MonitoredTest("IsFinished - Word not guessed yet and less than 6 guesses made - Should return false")]
         public void _16_IsFinished_WordNotGuessedYetAndLessThan6GuessesMade_ShouldReturnFalse()
         {
