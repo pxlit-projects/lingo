@@ -176,7 +176,7 @@ namespace Lingo.Domain.Tests
         {
             AssertThatInterfaceIsNotChanged();
 
-            int numberOfRuns = 100;
+            int numberOfRuns = 500;
 
             for (int i = 0; i < numberOfRuns; i++)
             {
