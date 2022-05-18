@@ -52,6 +52,8 @@ public class WordGuessTests : TestBase
     [TestCase("RAAR", "BABA", new[] { LetterMatch.DoesNotOccur, LetterMatch.Correct, LetterMatch.DoesNotOccur, LetterMatch.CorrectButInWrongPosition })]
     [TestCase("BABA", "RAAR", new[] { LetterMatch.DoesNotOccur, LetterMatch.Correct, LetterMatch.CorrectButInWrongPosition, LetterMatch.DoesNotOccur })]
     [TestCase("ADEM", "BACA", new[] { LetterMatch.DoesNotOccur, LetterMatch.CorrectButInWrongPosition, LetterMatch.DoesNotOccur, LetterMatch.DoesNotOccur })]
+    [TestCase("PAREN", "PAARD", new[] { LetterMatch.Correct, LetterMatch.Correct, LetterMatch.DoesNotOccur, LetterMatch.CorrectButInWrongPosition, LetterMatch.DoesNotOccur })]
+
     public void _04_Constructor_DuplicateLetterCases_ShouldSetLetterMatchesCorrectly(string solution, string word, LetterMatch[] expectedLetterMatches)
     {
         TestLetterMatches(solution, word, expectedLetterMatches);
