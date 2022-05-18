@@ -40,6 +40,7 @@ builder.Services.AddControllers(options =>
     jsonOutputFormatter.SerializerOptions.Converters.Add(new TwoDimensionalArrayJsonConverter());
     jsonOutputFormatter.SerializerOptions.Converters.Add(new PuzzleJsonConverter());
     jsonOutputFormatter.SerializerOptions.Converters.Add(new BallPitJsonConverter());
+    jsonOutputFormatter.SerializerOptions.Converters.Add(new PlayerJsonConverter());
 });
 
 builder.Services.AddCors();
