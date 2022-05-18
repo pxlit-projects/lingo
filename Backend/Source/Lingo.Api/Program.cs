@@ -155,6 +155,7 @@ builder.Services.AddSingleton<ILingoCardFactory, LingoCardFactory>();
 builder.Services.AddSingleton(typeof(ILingoCardFactory), typeof(LingoCardFactory));
 builder.Services.AddSingleton<IGameRepository, InMemoryGameRepository>();
 builder.Services.AddSingleton<IWordDictionaryRepository, InMemoryWordDictionaryRepository>();
+builder.Services.AddSingleton<IRankingStrategy, RankingStrategy>();
 
 var app = builder.Build();
 

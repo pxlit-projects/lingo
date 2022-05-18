@@ -1,5 +1,6 @@
 ﻿using Lingo.Common;
 using Lingo.Domain;
+using Lingo.Domain.Contracts;
 
 namespace Lingo.AppLogic.Contracts
 {
@@ -25,5 +26,11 @@ namespace Lingo.AppLogic.Contracts
         /// <returns>The user if it was found</returns>
         /// <exception cref="DataNotFoundException">Thrown when no matching user can be found</exception>
         User GetById(Guid id);
+
+        /// <summary>
+        /// Adjusts the ranking of the winner and loser of a game (and possibly the users ranked between them)
+        /// </summary>
+        /// <param name="game">The game that was played</param>
+        void AdjustRankingAfterGame(IGame game);
     }
 }

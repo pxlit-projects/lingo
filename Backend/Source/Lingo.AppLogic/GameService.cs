@@ -8,7 +8,10 @@ namespace Lingo.AppLogic
     /// <inheritdoc cref="IGameService"/>
     internal class GameService : IGameService
     {
-        public GameService(IGameRepository gameRepository, IGameFactory gameFactory, IPuzzleService puzzleService)
+        public GameService(IGameRepository gameRepository, 
+            IGameFactory gameFactory, 
+            IPuzzleService puzzleService, 
+            IUserRepository userRepository)
         {
 
         }

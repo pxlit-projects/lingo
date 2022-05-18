@@ -43,10 +43,14 @@ namespace Lingo.AppLogic.Tests
             _puzzleServiceMock.Setup(service => service.CreateStandardWordPuzzle(It.IsAny<int>()))
                 .Returns(new WordPuzzleMockBuilder().Object);
 
+            var userRepositoryMock = new Mock<IUserRepository>();
+
             _service = new GameService(
                 _gameRepositoryMock.Object,
                 _gameFactoryMock.Object,
-                _puzzleServiceMock.Object);
+                _puzzleServiceMock.Object,
+                userRepositoryMock.Object
+            );
 
             _gameSettings = new GameSettings();
         }
@@ -61,7 +65,7 @@ namespace Lingo.AppLogic.Tests
             _gameSettings.NumberOfStandardWordPuzzles = RandomGenerator.Next(2, 11);
             _gameSettings.MinimumWordLength = 4;
             _gameSettings.MaximumWordLength = 8;
-            
+
             //Act
             _service.CreateGameForUsers(user1, user2, _gameSettings);
 
