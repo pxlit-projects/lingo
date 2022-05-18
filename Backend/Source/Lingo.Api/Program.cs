@@ -40,6 +40,7 @@ builder.Services.AddControllers(options =>
     jsonOutputFormatter.SerializerOptions.Converters.Add(new TwoDimensionalArrayJsonConverter());
     jsonOutputFormatter.SerializerOptions.Converters.Add(new PuzzleJsonConverter());
     jsonOutputFormatter.SerializerOptions.Converters.Add(new BallPitJsonConverter());
+    jsonOutputFormatter.SerializerOptions.Converters.Add(new PlayerJsonConverter());
 });
 
 builder.Services.AddCors();
@@ -121,7 +122,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddDbContext<LingoDbContext>(options =>
 {
-    string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=LingoDb;Integrated Security=True";
+    string connectionString = configuration.GetConnectionString("LingoDbConnection");
     options.UseSqlServer(connectionString).EnableSensitiveDataLogging();
 });
 builder.Services.AddScoped<DatabaseSeeder>();
