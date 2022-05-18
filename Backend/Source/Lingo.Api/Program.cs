@@ -122,7 +122,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddDbContext<LingoDbContext>(options =>
 {
-    string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=LingoDb;Integrated Security=True";
+    string connectionString = configuration.GetConnectionString("LingoDbConnection");
     options.UseSqlServer(connectionString).EnableSensitiveDataLogging();
 });
 builder.Services.AddScoped<DatabaseSeeder>();
