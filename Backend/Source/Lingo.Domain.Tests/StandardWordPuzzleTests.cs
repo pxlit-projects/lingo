@@ -392,15 +392,19 @@ namespace Lingo.Domain.Tests
         {
             AssertThatInterfacesHaveNotChanged();
 
-            //Arrange
-            int numberOfGuesses = RandomGenerator.Next(1, 6);
-            for (int i = 0; i < numberOfGuesses; i++)
+            for (int numberOfGuesses = 1; numberOfGuesses <= 5; numberOfGuesses++)
             {
-                _puzzle.SubmitAnswer(_otherWords[i]);
-            }
+                _puzzle = new StandardWordPuzzle(_solution, _wordDictionary) as IWordPuzzle;
 
-            //Act + Assert
-            Assert.That(_puzzle.IsFinished, Is.False);
+                //Arrange
+                for (int i = 0; i < numberOfGuesses; i++)
+                {
+                    _puzzle.SubmitAnswer(_otherWords[i]);
+                }
+
+                //Act + Assert
+                Assert.That(_puzzle.IsFinished, Is.False);
+            }
         }
 
         [MonitoredTest("IsFinished - Word was guessed - Should return true")]
